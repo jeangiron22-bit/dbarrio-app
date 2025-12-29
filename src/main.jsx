@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { createRoot } from 'react-dom/client';
 import { 
   Users, 
   Calendar, 
@@ -128,10 +129,6 @@ const App = () => {
                   </div>
                 ))}
               </div>
-
-              <button className="w-full mt-10 bg-slate-900 text-white py-5 rounded-3xl font-black uppercase tracking-[0.3em] text-xs hover:bg-slate-800 transition-all shadow-2xl active:scale-95">
-                Cerrar Lista y Guardar Datos
-              </button>
             </div>
           </div>
         )}
@@ -161,10 +158,6 @@ const App = () => {
                       <p className="text-[8px] text-slate-400 font-black uppercase mb-1">Vueltas</p>
                       <p className="text-xl font-black text-slate-900 leading-none">{j.vueltas}</p>
                     </div>
-                  </div>
-                  <div className="mt-5 pt-4 border-t border-dashed border-slate-200 flex justify-between items-center text-[9px] font-black text-slate-400 uppercase tracking-widest">
-                    <span>Sin registros previos</span>
-                    <button className="text-slate-900 hover:text-yellow-600 transition-colors">Historial →</button>
                   </div>
                 </div>
               ))}
@@ -230,44 +223,19 @@ const App = () => {
         {/* TAB ESTRATEGIA (CEO) */}
         {activeTab === 'stats' && (
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 space-y-6">
-            <div className="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm relative overflow-hidden group">
+            <div className="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm relative overflow-hidden group text-center">
               <div className="relative z-10">
-                <h3 className="text-slate-400 font-black uppercase text-[10px] tracking-[0.3em] mb-6 underline decoration-yellow-500">Dashboard del CEO</h3>
-                <div className="grid grid-cols-2 gap-8">
-                  <div>
-                    <p className="text-4xl font-black text-slate-900 tracking-tighter">0%</p>
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2">Asistencia Grupal</p>
-                  </div>
-                  <div>
-                    <p className="text-4xl font-black text-slate-900 tracking-tighter">--</p>
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2">Meta Salud</p>
-                  </div>
-                </div>
+                <Trophy className="mx-auto mb-4 w-12 h-12 text-yellow-500" />
+                <h3 className="text-slate-900 font-black uppercase text-2xl tracking-tighter mb-2">ANIVERSARIO D'BARRIO</h3>
+                <p className="text-slate-400 font-black uppercase text-[10px] tracking-[0.3em] underline decoration-yellow-500">Próximo: 7 de Febrero</p>
               </div>
               <Activity className="absolute bottom-[-30px] right-[-30px] text-slate-50 w-52 h-52 group-hover:scale-110 transition-transform duration-700" />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-yellow-400 p-8 rounded-[2.5rem] text-slate-900 font-black shadow-xl shadow-yellow-100 relative overflow-hidden">
-                <div className="relative z-10">
-                  <Trophy className="mb-4 w-10 h-10" />
-                  <p className="text-3xl tracking-tighter leading-none mb-1">ANIVERSARIO</p>
-                  <p className="text-[10px] uppercase tracking-[0.2em] opacity-60">Próximo: 7 de Febrero</p>
-                </div>
-                <div className="absolute top-[-20px] right-[-20px] w-32 h-32 bg-white/20 rounded-full blur-2xl" />
-              </div>
-              <div className="bg-slate-100 p-8 rounded-[2.5rem] text-slate-900 font-black border border-slate-200 relative">
-                <AlertCircle className="mb-4 text-red-500 w-10 h-10" />
-                <p className="text-3xl tracking-tighter leading-none mb-1">DEUDA TOTAL</p>
-                <p className="text-[10px] uppercase tracking-[0.2em] text-red-500 font-black">S/ {totalDeuda}.00 pendientes</p>
-              </div>
             </div>
           </div>
         )}
 
       </main>
 
-      {/* Footer Info */}
       <footer className="fixed bottom-0 w-full bg-white/90 backdrop-blur-md border-t border-slate-200 p-5 text-center z-40">
         <div className="max-w-4xl mx-auto flex justify-between items-center">
            <p className="text-[9px] text-slate-400 font-black uppercase tracking-[0.3em]">
@@ -282,4 +250,9 @@ const App = () => {
   );
 };
 
-export default App;
+// Renderizado directo para mayor estabilidad
+const container = document.getElementById('root');
+if (container) {
+  const root = createRoot(container);
+  root.render(<App />);
+}xport default App;
